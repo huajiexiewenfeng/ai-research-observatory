@@ -1,0 +1,133 @@
+targets:
+  - id: openai
+    name: OpenAI
+    kind: company
+    tier: core
+    themes: [agent_runtime, agent_infra]
+    sources:
+      - {id: openai_news_rss, method: rss, url: "https://openai.com/news/rss.xml", evidence_tier: primary, enabled: true, max_items: 20}
+  - id: anthropic
+    name: Anthropic
+    kind: company
+    tier: core
+    themes: [agent_runtime, agent_infra]
+    sources:
+      - {id: anthropic_news_html, method: html, url: "https://www.anthropic.com/news", evidence_tier: primary, enabled: false, reason: selector_not_verified}
+  - id: google_deepmind
+    name: Google DeepMind
+    kind: company
+    tier: core
+    themes: [agent_runtime, inference]
+    sources:
+      - {id: deepmind_blog_rss, method: rss, url: "https://deepmind.google/blog/rss.xml", evidence_tier: primary, enabled: true, max_items: 20}
+  - id: meta_ai
+    name: Meta AI / FAIR
+    kind: company
+    tier: core
+    themes: [agent_runtime, inference]
+    sources:
+      - {id: meta_ai_blog_html, method: html, url: "https://ai.meta.com/blog/", evidence_tier: primary, enabled: false, reason: selector_not_verified}
+  - id: deepseek
+    name: DeepSeek
+    kind: company
+    tier: core
+    themes: [inference, agent_runtime]
+    sources:
+      - {id: deepseek_x, method: x_mcp, url: "https://x.com/deepseek_ai", evidence_tier: primary, enabled: false, reason: phase4_host_bridge}
+  - id: alibaba_qwen
+    name: Alibaba Qwen
+    kind: company
+    tier: core
+    themes: [agent_runtime, inference]
+    sources:
+      - {id: qwen_x, method: x_mcp, url: "https://x.com/Alibaba_Qwen", evidence_tier: primary, enabled: false, reason: phase4_host_bridge}
+
+  - {id: microsoft_research, name: Microsoft Research, kind: company, tier: watch, themes: [agent_infra, enterprise_transfer], sources: []}
+  - {id: nvidia_research, name: NVIDIA Research, kind: company, tier: watch, themes: [inference], sources: []}
+  - {id: hugging_face, name: Hugging Face, kind: company, tier: watch, themes: [agent_infra, inference], sources: []}
+  - {id: mistral_ai, name: Mistral AI, kind: company, tier: watch, themes: [inference], sources: []}
+  - {id: moonshot_ai, name: Moonshot AI, kind: company, tier: watch, themes: [agent_runtime], sources: []}
+  - {id: bytedance_seed, name: ByteDance Seed, kind: company, tier: watch, themes: [agent_runtime, inference], sources: []}
+  - {id: zhipu_ai, name: Zhipu AI, kind: company, tier: watch, themes: [agent_runtime], sources: []}
+  - {id: minimax, name: MiniMax, kind: company, tier: watch, themes: [agent_runtime], sources: []}
+  - {id: cohere, name: Cohere, kind: company, tier: watch, themes: [rag, enterprise_transfer], sources: []}
+  - {id: xai, name: xAI, kind: company, tier: watch, themes: [inference], sources: []}
+  - {id: megvii, name: Megvii, kind: company, tier: personal, themes: [enterprise_transfer], sources: []}
+
+  - id: langgenius_dify
+    name: Dify
+    kind: project
+    tier: core
+    themes: [agent_runtime, rag, enterprise_transfer]
+    sources:
+      - {id: dify_releases, method: github_releases, url: "https://github.com/langgenius/dify", evidence_tier: primary, enabled: true, repo: "langgenius/dify", max_items: 5}
+  - id: run_llama_llama_index
+    name: LlamaIndex
+    kind: project
+    tier: core
+    themes: [agent_runtime, rag]
+    sources:
+      - {id: llama_index_releases, method: github_releases, url: "https://github.com/run-llama/llama_index", evidence_tier: primary, enabled: true, repo: "run-llama/llama_index", max_items: 5}
+  - id: langchain_ai_langgraph
+    name: LangGraph
+    kind: project
+    tier: core
+    themes: [agent_runtime, agent_infra]
+    sources:
+      - {id: langgraph_releases, method: github_releases, url: "https://github.com/langchain-ai/langgraph", evidence_tier: primary, enabled: true, repo: "langchain-ai/langgraph", max_items: 5}
+  - id: modelcontextprotocol_modelcontextprotocol
+    name: Model Context Protocol
+    kind: project
+    tier: core
+    themes: [agent_runtime, agent_infra]
+    sources:
+      - {id: mcp_releases, method: github_releases, url: "https://github.com/modelcontextprotocol/modelcontextprotocol", evidence_tier: primary, enabled: true, repo: "modelcontextprotocol/modelcontextprotocol", max_items: 5}
+  - id: vllm_project_vllm
+    name: vLLM
+    kind: project
+    tier: core
+    themes: [inference]
+    sources:
+      - {id: vllm_releases, method: github_releases, url: "https://github.com/vllm-project/vllm", evidence_tier: primary, enabled: true, repo: "vllm-project/vllm", max_items: 5}
+  - id: sgl_project_sglang
+    name: SGLang
+    kind: project
+    tier: core
+    themes: [inference]
+    sources:
+      - {id: sglang_releases, method: github_releases, url: "https://github.com/sgl-project/sglang", evidence_tier: primary, enabled: true, repo: "sgl-project/sglang", max_items: 5}
+  - id: langfuse_langfuse
+    name: Langfuse
+    kind: project
+    tier: core
+    themes: [agent_infra]
+    sources:
+      - {id: langfuse_releases, method: github_releases, url: "https://github.com/langfuse/langfuse", evidence_tier: primary, enabled: true, repo: "langfuse/langfuse", max_items: 5}
+  - id: letta_ai_letta
+    name: Letta
+    kind: project
+    tier: core
+    themes: [agent_runtime]
+    sources:
+      - {id: letta_releases, method: github_releases, url: "https://github.com/letta-ai/letta", evidence_tier: primary, enabled: true, repo: "letta-ai/letta", max_items: 5}
+
+  - {id: infiniflow_ragflow, name: RAGFlow, kind: project, tier: watch, themes: [rag], sources: []}
+  - {id: deepset_ai_haystack, name: Haystack, kind: project, tier: watch, themes: [rag], sources: []}
+  - {id: labring_fastgpt, name: FastGPT, kind: project, tier: watch, themes: [rag, enterprise_transfer], sources: []}
+  - {id: hkuds_lightrag, name: LightRAG, kind: project, tier: watch, themes: [rag], sources: []}
+  - {id: openai_openai_agents_python, name: OpenAI Agents SDK, kind: project, tier: watch, themes: [agent_runtime], sources: []}
+  - {id: microsoft_autogen, name: AutoGen, kind: project, tier: watch, themes: [agent_runtime], sources: []}
+  - {id: crewaiinc_crewai, name: CrewAI, kind: project, tier: watch, themes: [agent_runtime], sources: []}
+  - {id: openhands_openhands, name: OpenHands, kind: project, tier: watch, themes: [agent_runtime, agent_infra], sources: []}
+  - {id: browser_use_browser_use, name: browser-use, kind: project, tier: watch, themes: [agent_runtime], sources: []}
+  - {id: google_adk_python, name: Google ADK, kind: project, tier: watch, themes: [agent_runtime], sources: []}
+  - {id: ggml_org_llama_cpp, name: llama.cpp, kind: project, tier: watch, themes: [inference], sources: []}
+  - {id: nvidia_tensorrt_llm, name: TensorRT-LLM, kind: project, tier: watch, themes: [inference], sources: []}
+  - {id: deepspeedai_deepspeed, name: DeepSpeed, kind: project, tier: watch, themes: [inference], sources: []}
+  - {id: ray_project_ray, name: Ray, kind: project, tier: watch, themes: [agent_infra, inference], sources: []}
+  - {id: ollama_ollama, name: Ollama, kind: project, tier: watch, themes: [inference], sources: []}
+  - {id: arize_ai_phoenix, name: Phoenix, kind: project, tier: watch, themes: [agent_infra], sources: []}
+  - {id: vibrantlabsai_ragas, name: Ragas, kind: project, tier: watch, themes: [rag, agent_infra], sources: []}
+  - {id: confident_ai_deepeval, name: DeepEval, kind: project, tier: watch, themes: [agent_infra], sources: []}
+  - {id: promptfoo_promptfoo, name: promptfoo, kind: project, tier: watch, themes: [agent_infra], sources: []}
+  - {id: mem0ai_mem0, name: Mem0, kind: project, tier: watch, themes: [agent_runtime], sources: []}

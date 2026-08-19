@@ -1,0 +1,6 @@
+themes:
+  - {id: agent_runtime, name: Agent Knowledge Runtime, weight: 20}
+  - {id: agent_infra, name: Agent Infra / Harness, weight: 20}
+  - {id: rag, name: RAG / Knowledge Engineering, weight: 15}
+  - {id: inference, name: Inference / Serving, weight: 15}
+  - {id: enterprise_transfer, name: Enterprise / Java Transferability, weight: 15}
