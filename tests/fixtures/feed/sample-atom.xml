@@ -1,0 +1,4 @@
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Research</title><entry>
+<title>Serving Update</title><link href="https://example.test/serving"/>
+<summary>Lower latency serving.</summary><updated>2026-08-19T00:00:00Z</updated>
+</entry></feed>
