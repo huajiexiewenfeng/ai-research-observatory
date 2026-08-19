@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+*.egg-info/
+evidence/
+runs/
+data/
+reports/
+cards/
+review/
+.env
+.browser-profile/
+.superpowers/
