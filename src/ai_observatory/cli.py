@@ -8,7 +8,8 @@ from pathlib import Path
 from .ledger import EvidenceLedger
 from .paths import ProjectPaths
 from .registry import RegistryError, load_registry
-from .runner import run_collection
+from .reports import render_daily
+from .runner import load_run_result, run_collection
 from .sources.base import AdapterRegistry
 from .sources.feed import FeedAdapter
 from .sources.github import GitHubReleasesAdapter
@@ -26,6 +27,11 @@ def build_parser() -> argparse.ArgumentParser:
     scan.add_argument("--date", type=date.fromisoformat, default=date.today())
     scan.add_argument("--profile", choices=("core", "all"), default="core")
     scan.add_argument("--timeout-seconds", type=int, default=15)
+    daily = subparsers.add_parser("render-daily")
+    daily.add_argument("--root", type=Path, default=Path.cwd())
+    daily.add_argument("--date", type=date.fromisoformat, required=True)
+    daily.add_argument("--run-id", required=True)
+    daily.add_argument("--limit", type=int, default=10)
     return parser
 
 
@@ -52,6 +58,18 @@ def _scan(args) -> int:
     return 3 if run.status == "empty" else 0
 
 
+def _render_daily(args) -> int:
+    paths, registry = _load(args.root)
+    run = load_run_result(paths.runs / args.date.isoformat() / f"{args.run_id}.json")
+    report = render_daily(args.date, registry, EvidenceLedger(paths.evidence).read_date(args.date),
+                          run, args.limit)
+    output = paths.reports / "daily" / f"{args.date.isoformat()}.md"
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(report, encoding="utf-8")
+    print(output.resolve())
+    return 0
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
@@ -62,6 +80,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             return _validate_config(args.root)
         if args.command == "scan":
             return _scan(args)
+        if args.command == "render-daily":
+            return _render_daily(args)
     except (RegistryError, FileNotFoundError, ValueError) as exc:
         print(f"配置错误：{exc}")
         return 2
