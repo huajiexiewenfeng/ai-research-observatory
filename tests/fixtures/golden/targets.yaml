@@ -1,0 +1,12 @@
+targets:
+  - id: openai
+    name: OpenAI
+    kind: company
+    tier: core
+    themes: [agent_runtime]
+    sources:
+      - id: openai_rss
+        method: rss
+        url: https://example.test/rss
+        evidence_tier: primary
+        enabled: true
