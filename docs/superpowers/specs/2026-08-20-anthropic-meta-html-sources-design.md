@@ -1,6 +1,6 @@
 # Anthropic 与 Meta AI 官网 HTML 来源设计
 
-- 状态：对话设计已批准，待仓库规格复核
+- 状态：设计已完成并通过仓库自审，待用户复核
 - 日期：2026-08-20
 - 项目：`huajiexiewenfeng/ai-research-observatory`
 - 阶段：Phase 1 Evidence radar 来源覆盖增强
@@ -238,4 +238,3 @@ ai-observatory render-daily --root . --date YYYY-MM-DD --run-id RUN_ID
 - Coverage 和日期质量满足第 11 节；
 - 同日重跑证明 Ledger 幂等；
 - 仓库只包含预期源码、配置、Fixture 和文档变更。
-
