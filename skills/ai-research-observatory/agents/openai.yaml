@@ -1,0 +1,5 @@
+interface:
+  display_name: "AI Research Observatory"
+  short_description: "Operate the evidence-driven AI research observatory."
+  default_prompt: "Use $ai-research-observatory to scan the core sources and summarize Coverage."
+
