@@ -34,8 +34,16 @@ def render_daily(
 ) -> str:
     target_names = {target.id: target.name for target in registry.targets}
     selected = sorted(evidence, key=lambda item: (-item.published_at.timestamp(), item.evidence_id))[:limit]
-    lines = [f"# AI Research Observatory 每日证据 - {run_date.isoformat()}", "",
-             render_coverage(run), "", "## 原始证据候选（尚未形成研究结论）", ""]
+    lines = [
+        f"# AI Research Observatory 每日证据 - {run_date.isoformat()}",
+        "",
+        "> 本报告展示本次观测周期首次发现的 Evidence；发布时间可能早于运行日期。",
+        "",
+        render_coverage(run),
+        "",
+        "## 原始证据候选（尚未形成研究结论）",
+        "",
+    ]
     if not selected:
         lines.append("本次没有获得可展示 Evidence；请先检查 Coverage，不能据此判断目标没有动态。")
     for index, item in enumerate(selected, start=1):
