@@ -27,6 +27,7 @@ ai-observatory validate-config --root .
 ## 扫描核心来源
 
 扫描是只读操作，不会向 GitHub 或 X 写入内容。
+`--date` 是运行分组日期，不会把远端查询限制为当天发布；日报展示该观测周期首次发现的 Evidence，并保留原始发布时间。
 
 ```powershell
 ai-observatory scan --root . --date YYYY-MM-DD --profile core
@@ -42,7 +43,7 @@ ai-observatory render-daily --root . --date YYYY-MM-DD --run-id RUN_ID
 
 ## 运行时文件
 
-- `evidence/`：按日期保存不可变 JSONL Evidence；
+- `evidence/ledger.jsonl`：全局保存不可变 Evidence，同一 `evidence_id` 只出现一次；
 - `runs/`：保存每次扫描的来源健康与 Coverage 清单；
 - `reports/`：保存生成的中文日报。
 
