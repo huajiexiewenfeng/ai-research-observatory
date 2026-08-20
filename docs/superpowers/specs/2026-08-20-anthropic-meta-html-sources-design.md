@@ -1,6 +1,6 @@
 # Anthropic 与 Meta AI 官网 HTML 来源设计
 
-- 状态：设计已完成并通过仓库自审，待用户复核
+- 状态：设计已完成、通过仓库自审并获用户批准
 - 日期：2026-08-20
 - 项目：`huajiexiewenfeng/ai-research-observatory`
 - 阶段：Phase 1 Evidence radar 来源覆盖增强
