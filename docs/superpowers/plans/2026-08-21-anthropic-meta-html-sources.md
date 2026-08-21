@@ -640,10 +640,10 @@ Run:
 & 'C:\Users\admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' -m pytest -q
 git diff --check
 git status --short
-rg -n "Authorization|Bearer |gho_|github_pat_|BEGIN .*PRIVATE KEY" evidence runs reports
+rg -l "Authorization\s*[:=]\s*Bearer\s+[A-Za-z0-9._-]{16,}|Bearer\s+[A-Za-z0-9._-]{20,}|gho_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY" evidence runs reports
 ```
 
-Expected: 完整测试零失败；diff check 无输出；运行目录不出现在 Git 状态；secret scan 无命中（`rg` exit code 1 为预期）。
+Expected: 完整测试零失败；diff check 无输出；运行目录不出现在 Git 状态；高风险 secret 形态扫描无命中（正文中的 “Bearer auth” 等术语不构成凭据，`rg` exit code 1 为预期）。
 
 ---
 
