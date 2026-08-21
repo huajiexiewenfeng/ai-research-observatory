@@ -4,12 +4,14 @@ from pathlib import Path
 import requests
 
 from ai_observatory.domain import EvidenceTier, SourceMethod, SourceSpec, TargetKind, TargetSpec, TargetTier
+from ai_observatory.registry import load_registry
 from ai_observatory.sources.base import CollectContext, SourceStatus
 from ai_observatory.sources.feed import FeedAdapter
 from ai_observatory.sources.html import HtmlAdapter
 
 
 FIXTURES = Path(__file__).parent / "fixtures"
+ROOT = Path(__file__).parents[1]
 
 
 class TextResponse:
@@ -208,3 +210,39 @@ def test_html_adapter_reports_request_error_with_complete_diagnostics():
     assert result.diagnostics["exception_type"] == "ConnectionError"
     assert result.diagnostics["queried"] is True
     assert_required_diagnostics(result)
+
+
+def configured_source(target_id, source_id):
+    registry = load_registry(ROOT / "config/targets.yaml", ROOT / "config/themes.yaml")
+    target = next(item for item in registry.targets if item.id == target_id)
+    return target, next(item for item in target.sources if item.id == source_id)
+
+
+def test_anthropic_fixture_matches_configured_contract():
+    target, source = configured_source("anthropic", "anthropic_news_html")
+    html = (FIXTURES / "html/anthropic-news.html").read_text(encoding="utf-8")
+    result = HtmlAdapter(FakeSession(html)).collect(target, source, CONTEXT)
+    assert result.status is SourceStatus.HEALTHY
+    assert [item.title for item in result.evidence] == [
+        "How Claude's text watermark works", "Improving biology safeguards",
+    ]
+    assert [item.url for item in result.evidence] == [
+        "https://www.anthropic.com/news/text-watermark",
+        "https://www.anthropic.com/news/biology-safeguards",
+    ]
+    assert result.diagnostics["published_at_inferred_count"] == 0
+
+
+def test_meta_fixture_matches_configured_contract_and_deduplicates():
+    target, source = configured_source("meta_ai", "meta_ai_blog_html")
+    html = (FIXTURES / "html/meta-ai-blog.html").read_text(encoding="utf-8")
+    result = HtmlAdapter(FakeSession(html)).collect(target, source, CONTEXT)
+    assert result.status is SourceStatus.HEALTHY
+    assert [item.title for item in result.evidence] == [
+        "Introducing Muse Spark 1.1", "Reimagining Independence",
+    ]
+    assert [item.published_at for item in result.evidence] == [
+        datetime(2026, 7, 9, tzinfo=UTC), datetime(2026, 7, 27, tzinfo=UTC),
+    ]
+    assert result.diagnostics["duplicate_count"] == 1
+    assert result.diagnostics["published_at_inferred_count"] == 0

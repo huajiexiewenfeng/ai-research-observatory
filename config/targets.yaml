@@ -12,7 +12,17 @@ targets:
     tier: core
     themes: [agent_runtime, agent_infra]
     sources:
-      - {id: anthropic_news_html, method: html, url: "https://www.anthropic.com/news", evidence_tier: primary, enabled: false, reason: selector_not_verified}
+      - id: anthropic_news_html
+        method: html
+        url: "https://www.anthropic.com/news"
+        evidence_tier: primary
+        enabled: true
+        item_selector: 'main li:has(> a[href^="/news/"])'
+        title_selector: 'a[href^="/news/"] > span:last-child'
+        link_selector: 'a[href^="/news/"]'
+        date_selector: 'time'
+        date_formats: ['%b %d, %Y', '%B %d, %Y']
+        max_items: 20
   - id: google_deepmind
     name: Google DeepMind
     kind: company
@@ -26,7 +36,17 @@ targets:
     tier: core
     themes: [agent_runtime, inference]
     sources:
-      - {id: meta_ai_blog_html, method: html, url: "https://ai.meta.com/blog/", evidence_tier: primary, enabled: false, reason: selector_not_verified}
+      - id: meta_ai_blog_html
+        method: html
+        url: "https://ai.meta.com/blog/"
+        evidence_tier: primary
+        enabled: true
+        item_selector: 'div:has(> div > div > h4):has(a[href*="blog"])'
+        title_selector: ':scope > div:first-child > div:nth-of-type(2) h4'
+        link_selector: 'a[href*="blog"]'
+        date_selector: ':scope > div:nth-of-type(2) p'
+        date_formats: ['%B %d, %Y', '%b %d, %Y']
+        max_items: 20
   - id: deepseek
     name: DeepSeek
     kind: company
