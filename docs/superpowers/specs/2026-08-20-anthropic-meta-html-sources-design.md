@@ -110,14 +110,14 @@ Target Registry YAML
   evidence_tier: primary
   enabled: true
   item_selector: 'div:has(> div > div > h4):has(a[href*=blog])'
-  title_selector: ':scope > div:first-child > div:nth-of-type(2) h4'
+  title_selector: ':scope > div:first-child > div:nth-last-of-type(2) h4'
   link_selector: 'a[href*=blog]'
   date_selector: ':scope > div:nth-of-type(2) p'
   date_formats: ['%B %d, %Y', '%b %d, %Y']
   max_items: 20
 ```
 
-该结构选择器已在 2026-08-20 官方首屏验证为 10 张 Blog Posts 卡片。它依赖语义结构、`h4` 和 blog 链接关系，不依赖不透明 class。日期选择器可以返回多个 `<p>`；解析器只接受完整文本能匹配允许格式的候选。
+该结构选择器已在 2026-08-20 官方首屏验证为 10 张 Blog Posts 卡片，并在 2026-08-21 真实扫描中补充验证了“有分类”和“无分类”两种卡片：两者的标题都位于内容区倒数第二个直接 `div`。它依赖语义结构、`h4` 和 blog 链接关系，不依赖不透明 class。日期选择器可以返回多个 `<p>`；解析器只接受完整文本能匹配允许格式的候选。
 
 ## 7. 提取和规范化规则
 
@@ -177,7 +177,7 @@ published_at_inferred_count
 - `tests/fixtures/html/anthropic-news.html`
 - `tests/fixtures/html/meta-ai-blog.html`
 
-Meta Fixture 至少包含两个不同文章卡和一个重复 URL；Anthropic Fixture 至少包含两个列表项及文本型 `<time>`。
+Meta Fixture 至少包含有分类、无分类两种文章卡和一个重复 URL；Anthropic Fixture 至少包含两个列表项及文本型 `<time>`。
 
 ### 10.2 单元与契约测试
 

@@ -42,7 +42,7 @@ targets:
         evidence_tier: primary
         enabled: true
         item_selector: 'div:has(> div > div > h4):has(a[href*="blog"])'
-        title_selector: ':scope > div:first-child > div:nth-of-type(2) h4'
+        title_selector: ':scope > div:first-child > div:nth-last-of-type(2) h4'
         link_selector: 'a[href*="blog"]'
         date_selector: ':scope > div:nth-of-type(2) p'
         date_formats: ['%B %d, %Y', '%b %d, %Y']

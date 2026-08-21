@@ -440,15 +440,15 @@ git commit -m "feat: harden html source collection"
 ```html
 <main>
   <div>
-    <div><div><h4>Research</h4></div><div><h4>Introducing Muse Spark 1.1</h4><p>Research update.</p></div></div>
+    <div><div><h4>Research</h4></div><div><h4>Introducing Muse Spark 1.1</h4></div><div><p>Research update.</p></div></div>
     <div><p>July 09, 2026</p><a href="/blog/introducing-muse-spark-1-1/">Learn More</a></div>
   </div>
   <div>
-    <div><div><h4>Open Source</h4></div><div><h4>Reimagining Independence</h4></div></div>
+    <div><div><h4>Reimagining Independence</h4></div><div><p>Assistive robotics update.</p></div></div>
     <div><p>July 27, 2026</p><a href="/blog/reimagining-independence/">Learn More</a></div>
   </div>
   <div>
-    <div><div><h4>Open Source</h4></div><div><h4>Duplicate card</h4></div></div>
+    <div><div><h4>Open Source</h4></div><div><h4>Duplicate card</h4></div><div><p>Duplicate summary.</p></div></div>
     <div><p>July 27, 2026</p><a href="/blog/reimagining-independence/#duplicate">Learn More</a></div>
   </div>
 </main>
@@ -562,7 +562,7 @@ Expected: 三个测试因两个来源仍为 `enabled: false` 且没有 selector/
         evidence_tier: primary
         enabled: true
         item_selector: 'div:has(> div > div > h4):has(a[href*="blog"])'
-        title_selector: ':scope > div:first-child > div:nth-of-type(2) h4'
+        title_selector: ':scope > div:first-child > div:nth-last-of-type(2) h4'
         link_selector: 'a[href*="blog"]'
         date_selector: ':scope > div:nth-of-type(2) p'
         date_formats: ['%B %d, %Y', '%b %d, %Y']
